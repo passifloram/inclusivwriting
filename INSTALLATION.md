@@ -1,76 +1,130 @@
 # Installation
 
-Cette version utilise un dictionnaire de **64 128 formes reconnues** (environ 2,4 Mo), généré à partir de Dicollecte 6.4.1 et complété par tes correspondances. Ce nombre inclut les féminins et les pluriels : ce ne sont pas 64 128 mots de base différents.
+Le module utilise un dictionnaire de **64 128 formes**, construit à partir de Dicollecte 6.4.1 et complété par les correspondances choisies pour le forum. Il pèse environ 2,4 Mo. Ce total comprend les masculins, les féminins et les pluriels d’un même mot.
 
-## Révision du 7 septembre : exceptions du blog
+## Mise à jour du 7 septembre
 
-Cette révision inclut 82 correspondances prioritaires, 8 anciennes graphies et des règles de pronoms et de possessifs. Remplace le JavaScript du forum par javascript.js : les exceptions fonctionnent aussi avec le dictionnaire distant précédent et son cache. Le détail des décisions et les sources figurent dans EXCEPTIONS-SOURCES.md. Le fichier exceptions-blog.json documente les données embarquées ; le navigateur ne le charge pas séparément.
+Cette version ajoute ou reprend 82 correspondances prioritaires, reconnaît 8 anciennes graphies et complète le traitement des pronoms et des possessifs.
 
-Pour synchroniser le dépôt, remplace aussi javascript.js et dictionnaire-inclusif.json sur GitHub, et ajoute les deux fichiers d’exceptions. Aucune publication n’a été effectuée depuis cet espace de travail.
+Pour en profiter, remplace le JavaScript du forum par le contenu de `javascript.js`. Les exceptions sont intégrées au script : elles fonctionnent même si le navigateur utilise encore l’ancien dictionnaire en cache.
 
-## 1. Ajouter le dictionnaire sur GitHub
+Les choix d’écriture et leurs sources sont détaillés dans `EXCEPTIONS-SOURCES.md`. Le fichier `exceptions-blog.json` reprend les exceptions pour pouvoir les consulter ; il n’est pas téléchargé par le navigateur.
 
-Dans ton dépôt `passifloram/inclusivwriting`, sur la branche `main`, ajoute à la racine :
+Pense aussi à mettre à jour `javascript.js` et `dictionnaire-inclusif.json` sur GitHub, puis à ajouter `EXCEPTIONS-SOURCES.md` et `exceptions-blog.json`. Ces changements ont été préparés localement, mais n’ont pas été publiés depuis cet espace de travail.
+
+## 1. Mettre le dictionnaire sur GitHub
+
+Dans le dépôt `passifloram/inclusivwriting`, sur la branche `main`, les fichiers suivants doivent se trouver à la racine :
 
 - `dictionnaire-inclusif.json`
 - `NOTICE-Dicollecte.txt`
 - `LICENSE-MPL-2.0.txt`
 
-Sur GitHub, tu peux utiliser **Add file → Upload files**, puis enregistrer les fichiers avec **Commit changes**. Le dépôt doit permettre la lecture publique du fichier. Le script attend cette adresse exacte :
+Ils sont déjà présents dans le dépôt. Pour les remplacer, utilise **Add file → Upload files**, puis **Commit changes**.
 
+Le dictionnaire doit rester accessible publiquement à [cette adresse](https://raw.githubusercontent.com/passifloram/inclusivwriting/main/dictionnaire-inclusif.json), utilisée par le script :
+
+```text
 https://raw.githubusercontent.com/passifloram/inclusivwriting/main/dictionnaire-inclusif.json
+```
 
-Le dictionnaire et les notices sont présents dans ce dépôt. Le JavaScript corrigé utilise désormais cette adresse ; remplace aussi la version installée sur le forum.
+## 2. Installer le JavaScript sur le forum
 
-## 2. Remplacer le JavaScript du forum
+Remplace entièrement l’ancien script inclusif par le contenu de `javascript.js`, **sans ajouter de balises `<script>`**. Une seule version doit rester active.
 
-Remplace entièrement ton ancien JavaScript inclusif par le contenu de `javascript.js`, sans balises `<script>`. Ne conserve pas les deux versions actives.
+Tu peux garder ton template et son bouton `replaceButton`. Le JavaScript doit être chargé aussi bien dans les sujets, pour les réponses rapides, que dans le formulaire complet de rédaction.
 
-Garde ton template actuel et son bouton `replaceButton`. Le script doit être chargé sur les pages des sujets et du formulaire complet. Recharge la page après l'installation.
+Recharge ensuite la page.
 
-Le clic convertit uniquement la sélection. Pendant le premier chargement, le bouton peut attendre jusqu'à six secondes. Si le texte change pendant l'attente, le script demande une nouvelle sélection plutôt que de modifier une sélection périmée.
+Le bouton convertit uniquement le texte sélectionné. Au premier chargement, il peut attendre jusqu’à six secondes pour récupérer le dictionnaire. Si tu modifies le texte entre-temps, le script te demande de refaire la sélection pour éviter de remplacer le mauvais passage.
 
-## 3. Vérifier
+## 3. Vérifier que tout fonctionne
 
-Sélectionne :
+Sélectionne ce texte, puis clique sur le bouton :
 
-    animateur.ice animateurs informaticiens étudiantes
+```text
+animateur.ice animateurs informaticiens étudiantes
+```
 
-Résultat attendu avec le dictionnaire élargi :
+Avec le dictionnaire complet, tu dois obtenir :
 
-    animateur·ice animateur·ice·s informaticien·ne·s étudiant·e·s
+```text
+animateur·ice animateur·ice·s informaticien·ne·s étudiant·e·s
+```
 
-Le titre affiché au survol du bouton indique si le dictionnaire élargi ou le secours est actif. Si `informaticiens` reste inchangé et que le titre indique le secours, vérifie la publication et l'adresse du JSON.
+Au survol du bouton, une indication précise si le dictionnaire complet ou celui de secours est utilisé.
+
+Si `informaticiens` reste inchangé et que le bouton indique le dictionnaire de secours, vérifie que le fichier JSON est bien publié et accessible à l’adresse prévue.
 
 ## Modifier les correspondances
 
-Dans `dictionnaire-inclusif.json`, les correspondances sont dans `entries`. Modifie ou ajoute les formes exactes souhaitées, avec des guillemets doubles et des virgules entre les lignes :
+Les correspondances se trouvent dans la partie `entries` de `dictionnaire-inclusif.json`. Tu peux y ajouter des mots ou modifier leur résultat.
 
-    "animateur": "animateur·ice",
-    "animatrice": "animateur·ice",
-    "animateurs": "animateur·ice·s",
-    "animatrices": "animateur·ice·s"
+Chaque forme doit avoir sa propre entrée, entre guillemets doubles :
 
-Les modifications du JSON distant sont reprises à la prochaine ouverture de page après expiration du cache de 24 heures. Pour forcer une actualisation sur ton navigateur, exécute `localStorage.removeItem('en-inclusif-dictionary-v1')` dans la console du forum, puis recharge la page.
+```json
+"animateur": "animateur·ice",
+"animatrice": "animateur·ice",
+"animateurs": "animateur·ice·s",
+"animatrices": "animateur·ice·s"
+```
 
-`personnalisations.json` est une sauvegarde de tes correspondances prioritaires utilisées pendant la génération ; le navigateur ne charge que `dictionnaire-inclusif.json`. Modifier cette sauvegarde seule ne change donc pas les conversions du forum.
+Sépare les entrées par des virgules, sans en ajouter après la dernière entrée de l’objet.
 
-## Fonctionnement et limites
+Le navigateur conserve le dictionnaire en cache pendant 24 heures. Les changements seront donc récupérés lors d’une ouverture de page après l’expiration de ce délai.
 
-- La base est téléchargée une fois puis mise en cache, si le navigateur permet le stockage. Aucun texte de message n'est envoyé à GitHub.
-- Si GitHub est indisponible, le script garde le cache existant, ou utilise les 962 correspondances intégrées de secours. Le dictionnaire élargi ne sera disponible qu'après publication du JSON.
-- Les points des suffixes inclusifs, notamment `.ice`, `.ices`, `.rice`, `.e` et `.s`, sont normalisés indépendamment du dictionnaire.
-- La convention choisie est `animateur·ice` et `animateur·ice·s`. Les autres correspondances personnelles restent prioritaires sur les formes calculées.
-- L'import utilise des couples masculin/féminin du même identifiant lexical et leurs pluriels explicites. Les groupes ayant plusieurs singuliers concurrents sont ignorés. Les conflits de correspondances et les formes reconnues comme mots grammaticaux ou verbes conjugués sont écartés de l'import automatique. Les correspondances personnelles sont ensuite appliquées.
-- Les nouvelles formes inclusives sont **calculées**, pas validées individuellement par une personne. Dicollecte est une base de français, pas un dictionnaire inclusif officiel.
-- Ce script n'analyse pas les accords de toute la phrase. Des adjectifs décrivant des objets peuvent être transformés. Les mots ambigus comme `heureux` conservent par défaut la forme inclusive singulière. Les articles un/une sont convertis en un·e, et le/la/lae en lae, devant les noms de personnes reconnus par une liste dédiée, éventuellement précédés de quelques adjectifs courants. Cette règle fonctionne aussi sur les mots déjà inclusifs. Elle ne couvre pas toutes les constructions grammaticales.
-- En mode visuel, la mise en forme est conservée en traitant les fragments de texte séparément. Un mot coupé en plusieurs fragments par du gras ou de l'italique peut ne pas être reconnu.
-- Les URL, e-mails et balises sont préservés. Les blocs BBCode `[code]` sont protégés dans une sélection textuelle complète ; les éléments HTML `code` et `pre` sont ignorés dans l'éditeur visuel.
+Pour les voir tout de suite sur ton navigateur, exécute cette ligne dans la console du forum, puis recharge la page :
 
-## Origine et licence
+```javascript
+localStorage.removeItem('en-inclusif-dictionary-v1');
+```
 
-Source : Dicollecte 6.4.1, Olivier R., https://grammalecte.net/ ; copie distribuée par https://lexique.org/databases/Dicollecte/.
+Le fichier `personnalisations.json` garde une copie des correspondances personnelles utilisées pour générer le dictionnaire. Le modifier seul ne change rien sur le forum : le navigateur télécharge uniquement `dictionnaire-inclusif.json`.
 
-Le dictionnaire dérivé est fourni sous MPL 2.0, avec sa notice et le texte de licence joints. Modifications : extraction de couples genrés, génération de formes inclusives, filtres d'ambiguïté et ajout de correspondances personnelles, septembre 2026. Le JSON livré constitue la forme éditable de ces données.
+## Comment fonctionne le module
 
-Vérifications locales : `node test.cjs`. Elles couvrent notamment le paragraphe fourni, les nouveaux mots, la sélection au clic, les suffixes, le cache, le secours et le rejet d'un dictionnaire mal formé. L'intégration réelle sur le forum reste à vérifier après installation.
+Le dictionnaire est téléchargé, puis conservé dans le navigateur lorsque le stockage est disponible. **Le texte des messages n’est pas envoyé à GitHub** : la conversion se fait dans le navigateur.
+
+Si GitHub est inaccessible, le script utilise le dictionnaire déjà en cache. À défaut, il dispose de 962 correspondances de secours intégrées au JavaScript. Le dictionnaire complet doit être publié pour pouvoir être téléchargé.
+
+Les points simples des terminaisons inclusives, comme `.ice`, `.ices`, `.rice`, `.e` et `.s`, sont remplacés par des points médians indépendamment du dictionnaire.
+
+Le module conserve les formes `animateur·ice` et `animateur·ice·s`. Les correspondances personnelles passent avant les formes générées automatiquement.
+
+### La construction du dictionnaire
+
+Le dictionnaire rapproche les formes masculines et féminines d’une même entrée de Dicollecte, ainsi que leurs pluriels lorsqu’ils sont indiqués.
+
+Certains cas sont écartés pendant la génération : les entrées comportant plusieurs singuliers concurrents, les correspondances contradictoires et les formes également reconnues comme des mots grammaticaux ou des verbes conjugués. Les correspondances personnelles sont ajoutées ensuite.
+
+Les formes inclusives obtenues sont calculées automatiquement. Elles n’ont pas toutes été relues une par une : Dicollecte fournit une base de vocabulaire français, pas un dictionnaire inclusif officiel.
+
+## Les limites à connaître
+
+Le script ne comprend pas toute la phrase et ne vérifie pas l’ensemble des accords. Il peut donc transformer un adjectif qui décrit un objet. Pour un mot comme `heureux`, dont le singulier et le pluriel sont identiques, il conserve par défaut la forme inclusive singulière.
+
+Les articles `un` et `une` deviennent `un·e`, et `le`, `la` ou `lae` deviennent `lae`, lorsque le script reconnaît un nom de personne. Quelques adjectifs courants peuvent se trouver entre l’article et le nom. Cela fonctionne aussi lorsque le nom est déjà écrit en inclusif, mais toutes les constructions de phrase ne sont pas couvertes.
+
+Dans l’éditeur visuel, la mise en forme est conservée en traitant séparément les morceaux de texte. Un mot dont une partie seulement est en gras ou en italique peut ainsi ne pas être reconnu.
+
+Les liens, les adresses e-mail et les balises sont préservés. Les blocs BBCode `[code]` sont protégés lorsqu’ils sont entièrement compris dans la sélection textuelle. Dans l’éditeur visuel, le contenu des éléments HTML `code` et `pre` est ignoré.
+
+## Source et licence
+
+Le dictionnaire provient de **Dicollecte 6.4.1**, créé par Olivier R., disponible sur [Grammalecte](https://grammalecte.net/) et également distribué par [Lexique.org](https://lexique.org/databases/Dicollecte/).
+
+La version adaptée est fournie sous licence **MPL 2.0**, avec la notice et le texte de licence.
+
+Les modifications réalisées en septembre 2026 comprennent le rapprochement des formes masculines et féminines, la génération des écritures inclusives, le filtrage de certains cas ambigus et l’ajout des correspondances personnelles. Le fichier JSON fourni permet de consulter et de modifier ces données.
+
+## Vérifications
+
+Les tests locaux se lancent avec :
+
+```bash
+node test.cjs
+```
+
+Ils couvrent notamment le paragraphe d’exemple, les nouveaux mots, la conservation de la sélection au clic, les terminaisons inclusives, le cache, le dictionnaire de secours et le refus d’un dictionnaire mal formé.
+
+Le fonctionnement sur le forum reste à vérifier après l’installation.
