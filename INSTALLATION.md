@@ -1,10 +1,16 @@
 # Installation
 
-Cette version utilise un dictionnaire de **64 077 formes reconnues** (environ 2,4 Mo), généré à partir de Dicollecte 6.4.1. Ce nombre inclut les féminins et les pluriels : ce ne sont pas 64 077 mots de base différents.
+Cette version utilise un dictionnaire de **64 128 formes reconnues** (environ 2,4 Mo), généré à partir de Dicollecte 6.4.1 et complété par tes correspondances. Ce nombre inclut les féminins et les pluriels : ce ne sont pas 64 128 mots de base différents.
+
+## Révision du 7 septembre : exceptions du blog
+
+Cette révision inclut 82 correspondances prioritaires, 8 anciennes graphies et des règles de pronoms et de possessifs. Remplace le JavaScript du forum par javascript.js : les exceptions fonctionnent aussi avec le dictionnaire distant précédent et son cache. Le détail des décisions et les sources figurent dans EXCEPTIONS-SOURCES.md. Le fichier exceptions-blog.json documente les données embarquées ; le navigateur ne le charge pas séparément.
+
+Pour synchroniser le dépôt, remplace aussi javascript.js et dictionnaire-inclusif.json sur GitHub, et ajoute les deux fichiers d’exceptions. Aucune publication n’a été effectuée depuis cet espace de travail.
 
 ## 1. Ajouter le dictionnaire sur GitHub
 
-Dans ton dépôt, sur la branche `main`, ajoute à la racine :
+Dans ton dépôt `passifloram/inclusivwriting`, sur la branche `main`, ajoute à la racine :
 
 - `dictionnaire-inclusif.json`
 - `NOTICE-Dicollecte.txt`
@@ -12,9 +18,9 @@ Dans ton dépôt, sur la branche `main`, ajoute à la racine :
 
 Sur GitHub, tu peux utiliser **Add file → Upload files**, puis enregistrer les fichiers avec **Commit changes**. Le dépôt doit permettre la lecture publique du fichier. Le script attend cette adresse exacte :
 
-https://raw.githubusercontent.com/delulucriminou/en_inclusif/main/dictionnaire-inclusif.json
+https://raw.githubusercontent.com/passifloram/inclusivwriting/main/dictionnaire-inclusif.json
 
-Ces fichiers ont été préparés localement ; ils ne sont pas encore publiés sur GitHub.
+Le dictionnaire et les notices sont présents dans ce dépôt. Le JavaScript corrigé utilise désormais cette adresse ; remplace aussi la version installée sur le forum.
 
 ## 2. Remplacer le JavaScript du forum
 
@@ -57,7 +63,7 @@ Les modifications du JSON distant sont reprises à la prochaine ouverture de pag
 - La convention choisie est `animateur·ice` et `animateur·ice·s`. Les autres correspondances personnelles restent prioritaires sur les formes calculées.
 - L'import utilise des couples masculin/féminin du même identifiant lexical et leurs pluriels explicites. Les groupes ayant plusieurs singuliers concurrents sont ignorés. Les conflits de correspondances et les formes reconnues comme mots grammaticaux ou verbes conjugués sont écartés de l'import automatique. Les correspondances personnelles sont ensuite appliquées.
 - Les nouvelles formes inclusives sont **calculées**, pas validées individuellement par une personne. Dicollecte est une base de français, pas un dictionnaire inclusif officiel.
-- Ce script n'analyse pas les accords de toute la phrase. Des adjectifs décrivant des objets peuvent être transformés. Les mots ambigus comme `heureux` conservent par défaut la forme inclusive singulière. Les déterminants ne sont pas systématiquement convertis.
+- Ce script n'analyse pas les accords de toute la phrase. Des adjectifs décrivant des objets peuvent être transformés. Les mots ambigus comme `heureux` conservent par défaut la forme inclusive singulière. Les articles un/une sont convertis en un·e, et le/la/lae en lae, devant les noms de personnes reconnus par une liste dédiée, éventuellement précédés de quelques adjectifs courants. Cette règle fonctionne aussi sur les mots déjà inclusifs. Elle ne couvre pas toutes les constructions grammaticales.
 - En mode visuel, la mise en forme est conservée en traitant les fragments de texte séparément. Un mot coupé en plusieurs fragments par du gras ou de l'italique peut ne pas être reconnu.
 - Les URL, e-mails et balises sont préservés. Les blocs BBCode `[code]` sont protégés dans une sélection textuelle complète ; les éléments HTML `code` et `pre` sont ignorés dans l'éditeur visuel.
 

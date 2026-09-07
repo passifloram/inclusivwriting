@@ -78,10 +78,15 @@ $(document).ready(function () {
         }
     })();
 
+    // Exceptions relues : prioritaires sur le dictionnaire distant et son cache.
+    const BLOG_EXCEPTIONS = new Map(Object.entries({"celui":"cellui","celle":"cellui","ceux":"celleux","celles":"celleux","eux":"elleux","frère":"frœur","sœur":"frœur","soeur":"frœur","frères":"frœurs","sœurs":"frœurs","soeurs":"frœurs","oncle":"tancle","tante":"tancle","oncles":"tancles","tantes":"tancles","père":"parent","mère":"parent","pères":"parents","mères":"parents","monsieur":"mondame","madame":"mondame","messieurs":"mondames","mesdames":"mondames","nouveau":"nouvelle·au","nouvel":"nouvelle·au","nouvelle":"nouvelle·au","nouveaux":"nouvelle·aux","nouvelles":"nouvelle·aux","beau":"beau·elle","bel":"beau·elle","belle":"beau·elle","beaux":"beaux·elles","belles":"beaux·elles","fou":"fou·lle","fol":"fou·lle","folle":"fou·lle","fous":"fou·lle·s","folles":"fou·lle·s","vieux":"vieux·eille","vieil":"vieux·eille","vieille":"vieux·eille","vieilles":"vieux·eille·s","chef":"chef·fe","cheffe":"chef·fe","chefs":"chef·fe·s","cheffes":"chef·fe·s","docteur":"docteur·e","docteure":"docteur·e","docteurs":"docteur·e·s","docteures":"docteur·e·s","municipaux":"municipaux·ales","municipales":"municipaux·ales","nombreux":"nombreux·ses","nombreuses":"nombreux·ses","chacun":"chacun·e","chacune":"chacun·e","con":"con·ne","conne":"con·ne","cons":"con·ne·s","connes":"con·ne·s","alternant":"alternant·e","alternante":"alternant·e","alternants":"alternant·e·s","alternantes":"alternant·e·s","lequel":"laequelle","laquelle":"laequelle","lesquels":"lesquel·le·s","lesquelles":"lesquel·le·s","copain":"copain·ine","copine":"copain·ine","copains":"copain·ine·s","copines":"copain·ine·s","roi":"roi·eine","reine":"roi·eine","rois":"roi·eine·s","reines":"roi·eine·s","certain":"certain·e","certaine":"certain·e","certains":"certain·e·s","certaines":"certain·e·s","parent":"parent","parents":"parents"}));
+
+    const BLOG_ALIASES = new Map(Object.entries({"nouveau·elle":"nouvelle·au","nouveau·elle·s":"nouvelle·aux","copain·e":"copain·ine","copain·e·s":"copain·ine·s","celui·elle":"cellui","celles·eux":"celleux","elles·eux":"elleux","laequel·le":"laequelle"}));
+
     function convert(text) {
         // Les URL, e-mails, balises et blocs code restent intacts.
-        const protectedParts = /(\[code(?:=[^\]]*)?\][\s\S]*?\[\/code\]|<code\b[^>]*>[\s\S]*?<\/code>|https?:\/\/[^\s<>\[\]]+|www\.[^\s<>\[\]]+|[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,}|<[^>]*>|\[[^\]]*\])/giu;
-        const suffixes = 'e|s|es|ne|nes|le|les|se|ses|ice|ices|rice|rices|ère|ères|elle|elles|ve|ves|euse|euses|te|tes|que|ques|he|hes|ue|ues';
+        const protectedParts = /((?<![\p{L}\p{M}])il\s+fait\s+(?:beau|chaud|froid|nuit|jour)(?![\p{L}\p{M}])|(?<![\p{L}\p{M}])il\s+est\s+(?:possible|nécessaire|important|temps|tard|tôt|clair)(?![\p{L}\p{M}])|\[code(?:=[^\]]*)?\][\s\S]*?\[\/code\]|<code\b[^>]*>[\s\S]*?<\/code>|https?:\/\/[^\s<>\[\]]+|www\.[^\s<>\[\]]+|[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,}|<[^>]*>|\[[^\]]*\])/giu;
+        const suffixes = 'tte|ttes|ine|ines|eine|eines|au|aux|eux|fe|fes|lle|lles|eille|eilles|ales|e|s|es|ne|nes|le|les|se|ses|ice|ices|rice|rices|ère|ères|elle|elles|ve|ves|euse|euses|te|tes|que|ques|he|hes|ue|ues';
         const dotted = new RegExp('^([\\p{L}\\p{M}-]+)((?:[.·](?:' + suffixes + '))+)$', 'iu');
         function caseLike(word, replacement) {
             if (word === word.toLocaleUpperCase('fr')) return replacement.toLocaleUpperCase('fr');
@@ -89,19 +94,81 @@ $(document).ready(function () {
             return replacement;
         }
         function replaceWord(word) {
+            const alias = BLOG_ALIASES.get(word.normalize('NFC').toLocaleLowerCase('fr').replace(/\./g, '·'));
+            if (alias) return caseLike(word, alias);
             const inclusive = dotted.exec(word);
             if (inclusive) return inclusive[1] + inclusive[2].replace(/\./g, '·');
             if (word.includes('.') || word.includes('·')) return word;
             const normalized = word.normalize('NFC').toLocaleLowerCase('fr');
-            const replacement = dictionary.get(normalized);
+            const replacement = BLOG_EXCEPTIONS.get(normalized) || dictionary.get(normalized);
             if (replacement) return caseLike(word, replacement);
             // Les composés explicitement présents sont prioritaires.
             if (word.includes('-')) return word.split('-').map(replaceWord).join('-');
             return word;
         }
+        // Articles devant une personne, avec quelques adjectifs intercalés.
+        // Ne pas remplacer globalement « la » : cela toucherait aussi les pronoms.
+        const people = new Set(('ami copain cousin voisin citoyen habitant résident participant candidat adhérent membre invité utilisateur abonné client patient bénéficiaire usager propriétaire locataire responsable étudiant élève lycéen collégien écolier apprenti stagiaire enseignant professeur formateur éducateur chercheur doctorant diplômé employé salarié travailleur collaborateur professionnel indépendant entrepreneur consultant assistant adjoint expert technicien ouvrier artisan commerçant vendeur serveur caissier cuisinier boulanger pâtissier coiffeur infirmier médecin pharmacien psychologue avocat juriste ingénieur architecte journaliste rédacteur traducteur président directeur administrateur coordinateur organisateur animateur médiateur représentant délégué conseiller secrétaire maire député sénateur ministre élu acteur auteur lecteur écrivain créateur réalisateur producteur éditeur illustrateur dessinateur photographe designer chanteur danseur musicien artiste joueur sportif entraîneur coach arbitre supporter spectateur compétiteur gagnant perdant fondateur modérateur partenaire inscrit bénévole volontaire demandeur accompagnateur intervenant référent tuteur protecteur observateur visiteur acheteur consommateur donateur informaticien chef docteur alternant frœur parent tancle mondame enfant adelphe roi').split(' '));
+        const modifiers = new Set('nouveau nouvel nouvelle jeune ancien grand petit bon cher futur premier dernier excellent beau beaux fou vieux'.split(' '));
+        function base(word) {
+            const lower = word.toLocaleLowerCase('fr');
+            return (BLOG_EXCEPTIONS.get(lower) || dictionary.get(lower) || lower).split(/[·.]/)[0];
+        }
+        function articles(part) {
+            const words = Array.from(part.matchAll(/\p{L}[\p{L}\p{M}]*(?:[-.·][\p{L}\p{M}]+)*/gu));
+            const changes = [];
+            words.forEach(function (match, index) {
+                const article = match[0].toLocaleLowerCase('fr');
+                const determiners = { un: 'un·e', une: 'un·e', le: 'lae', la: 'lae', lae: 'lae',
+                    'le·la': 'lae', 'la·e': 'lae', mon: 'maon', ma: 'maon', ton: 'taon', ta: 'taon',
+                    son: 'saon', sa: 'saon', ce: 'ce·tte', cet: 'ce·tte', cette: 'ce·tte', au: 'à lae', du: 'de lae' };
+                if (!Object.prototype.hasOwnProperty.call(determiners, article)) return;
+                let previousEnd = match.index + match[0].length;
+                for (let j = index + 1; j < words.length && j <= index + 4; j++) {
+                    const next = words[j];
+                    if (!/^\s+$/.test(part.slice(previousEnd, next.index))) break;
+                    const stem = base(next[0]);
+                    if (people.has(stem)) {
+                        changes.push({ start: match.index, end: match.index + match[0].length,
+                            text: caseLike(match[0], determiners[article]) });
+                        break;
+                    }
+                    if (!modifiers.has(stem)) break;
+                    previousEnd = next.index + next[0].length;
+                }
+            });
+            changes.reverse().forEach(function (change) {
+                part = part.slice(0, change.start) + change.text + part.slice(change.end);
+            });
+            return part;
+        }
+        function pronouns(part) {
+            // Doublets explicites : éviter « cellui ou cellui » et « iel/iel ».
+            const pairs = [
+                ['lequel', 'laquelle', 'laequelle'], ['celui', 'celle', 'cellui'], ['ceux', 'celles', 'celleux'],
+                ['eux', 'elles', 'elleux'], ['il', 'elle', 'iel'], ['ils', 'elles', 'iels'],
+                ['le', 'la', 'lae'], ['un', 'une', 'un·e']
+            ];
+            pairs.forEach(function ([a, b, value]) {
+                const pattern = new RegExp('(?<![\\p{L}\\p{M}·.-])(?:' + a + '(?:\\s*[/·]\\s*|\\s+(?:et|ou)\\s+)' + b + '|' + b + '(?:\\s*[/·]\\s*|\\s+(?:et|ou)\\s+)' + a + ')(?![\\p{L}\\p{M}·.-])', 'giu');
+                part = part.replace(pattern, function (word) { return caseLike(word, value); });
+            });
+            return part.replace(/(?<![\p{L}\p{M}·.-])(il|elle|ils|elles|lui)(?![\p{L}\p{M}·.-])/giu, function (word, _, offset) {
+                const lower = word.toLocaleLowerCase('fr');
+                const before = part.slice(0, offset);
+                const after = part.slice(offset + word.length);
+                // Il impersonnel : ne pas produire « iel faut », « iel y a ».
+                if (lower === 'il' && /^\s+(?:(?:ne\s+)?(?:faut|fallait|faudra|faudrait|pleut|pleuvait|neige|neigeait|semble|semblerait|importe|suffit|reste)\b|(?:n['’])?y\b|s['’]agit\b|est\s+(?:possible|nécessaire|important|temps|tard|tôt|clair)\b|fait\s+(?:beau|chaud|froid|nuit|jour)\b)/iu.test(after)) return word;
+                const tonic = /(?:^|[^\p{L}\p{M}])(?:avec|pour|sans|chez|vers|contre|entre|par|devant|derrière|selon|sur|en|à|de)\s*$/iu.test(before) || /d['’]$/iu.test(before);
+                // « lui » complément indirect convient déjà à tous les genres.
+                if (lower === 'lui' && !tonic) return word;
+                const value = tonic ? (lower === 'elles' ? 'elleux' : 'ellui') : (lower === 'ils' || lower === 'elles' ? 'iels' : 'iel');
+                return caseLike(word, value);
+            });
+        }
         return text.split(protectedParts).map(function (part, index) {
             if (index % 2) return part;
-            return part.replace(/\p{L}[\p{L}\p{M}]*(?:[-.·][\p{L}\p{M}]+)*/gu, replaceWord);
+            return articles(pronouns(part).replace(/\p{L}[\p{L}\p{M}]*(?:[-.·][\p{L}\p{M}]+)*/gu, replaceWord));
         }).join('');
     }
 
