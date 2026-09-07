@@ -1,77 +1,98 @@
-# Exceptions vérifiées dans le blog Inclusi
+# Les exceptions du dictionnaire inclusif
 
-Relecture du 7 septembre 2026. Les liens ci-dessous ont fourni des propositions lisibles. D'autres fiches ont été repérées dans l'index mais n'ont pas pu être lues : elles n'ont pas servi à inventer des correspondances. Il ne s'agit donc pas d'un import exhaustif du blog.
+Texte mis à jour le 7 septembre 2026 à partir des articles du blog Inclusi.
 
-## Convention choisie pour ce module
+Cette liste reprend les propositions des articles qui ont pu être consultés. Certaines fiches étaient présentes dans l’index, mais leur contenu n’était pas accessible : elles n’ont donc pas été utilisées. Le dictionnaire ne reprend pas encore l’ensemble du blog.
 
-On conserve les points médians pour les noms et adjectifs, et des formes combinées pour certains mots grammaticaux et noms sans terminaison commune. `lae` et `animateur·ice` restent les choix demandés. Les points ordinaires des fiches deviennent des points médians. Les pluriels ajoutés à partir d'une fiche au singulier sont des extensions du module, pas des citations de la fiche.
+## Les choix d’écriture du module
 
-Le script embarque **82 correspondances lexicales prioritaires**, **8 anciennes graphies reconnues**, et des règles distinctes pour les articles, possessifs et pronoms. Certaines correspondances étaient déjà présentes ; ce total n'est pas un nombre de mots entièrement nouveaux. Le dictionnaire complet compte désormais **64 128 formes**.
+Le module utilise les points médians pour les noms et les adjectifs, avec quelques formes comme `lae`, `cellui` ou `frœur`. Les graphies `lae` et `animateur·ice` sont conservées, conformément aux choix faits pour le forum.
 
-## Correspondances retenues ou corrigées
+Les points simples utilisés dans certaines fiches sont remplacés par des points médians. Lorsque l’article ne donne qu’un singulier, des pluriels ont parfois été ajoutés pour compléter le dictionnaire. Ces ajouts sont indiqués ci-dessous.
 
-| Fiche consultée | Choix appliqué et remarque |
+Le script comprend **82 correspondances prioritaires**, reconnaît **8 anciennes graphies** et applique des règles supplémentaires aux articles, aux possessifs et aux pronoms. Une partie de ces correspondances existait déjà : il ne s’agit donc pas de 82 nouveaux mots. Le dictionnaire contient au total **64 128 formes**.
+
+## Les formes ajoutées ou corrigées
+
+| Article | Forme utilisée dans le module |
 |---|---|
-| [Le / la](https://www.inclusi.fr/blog/le-la-inclusif) | `lae`, devant une personne reconnue. |
+| [Le / la](https://www.inclusi.fr/blog/le-la-inclusif) | `lae`, lorsque le mot qui suit est reconnu comme désignant une personne. |
 | [Celui / celle](https://www.inclusi.fr/blog/celui-celle-inclusif) | `cellui`. |
 | [Ceux / celles](https://www.inclusi.fr/blog/ceux-celles-inclusif) | `celleux`. |
-| [Eux / elles](https://www.inclusi.fr/blog/eux-elles-inclusif) | `elleux` pour le pronom tonique ; `elles` sujet devient `iels`. |
-| [Lequel / laquelle](https://www.inclusi.fr/blog/lequel-laquelle-inclusif) | `laequelle` ; pluriel ajouté `lesquel·le·s`. |
-| [Ce / cette](https://www.inclusi.fr/blog/ce-cette-inclusif) | `ce·tte` devant une personne ; prise en charge de `cet` également. |
-| [Chacun / chacune](https://www.inclusi.fr/blog/chacun-chacune-inclusif) | `chacun·e`, confirmé. |
-| [Certain / certaine](https://www.inclusi.fr/blog/certain-certaine-inclusif) | `certain·e`, pluriel `certain·e·s`. |
-| [Frère / sœur](https://www.inclusi.fr/blog/frere-soeur-inclusif) | `frœur` ; pluriel et variante sans ligature ajoutés. |
-| [Monsieur / madame](https://www.inclusi.fr/blog/monsieur-madame-inclusif) | `mondame` ; `messieurs/mesdames` → `mondames` est une extension. |
-| [Nouveau / nouvelle](https://www.inclusi.fr/blog/nouveau-nouvelle-inclusif) | `nouvelle·au`, y compris `nouvel`. |
-| [Nouveaux / nouvelles](https://www.inclusi.fr/blog/nouveaux-nouvelles-inclusif) | `nouvelle·aux`, traité explicitement. |
-| [Beau / belle](https://www.inclusi.fr/blog/beau-belle-inclusif) | `beau·elle` ; variante `bel` ajoutée. |
-| [Beaux / belles](https://www.inclusi.fr/blog/beaux-belles-inclusif) | `beaux·elles`, au lieu d'un pluriel calculé depuis le singulier. |
-| [Fou / folle](https://www.inclusi.fr/blog/fou-folle-inclusif) | `fou·lle` ; variante `fol` et pluriels ajoutés. |
-| [Vieux / vieille](https://www.inclusi.fr/blog/vieux-vieille-inclusif) | `vieux·eille` ; `vieil` ajouté. `vieux` reste ambigu en nombre. |
-| [Copain / copine](https://www.inclusi.fr/blog/copain-copine-inclusif) | `copain·ine` remplace l'ancienne correspondance `copain·e`. |
-| [Roi / reine](https://www.inclusi.fr/blog/roi-reine-inclusif) | `roi·eine` ; pluriels ajoutés. |
-| [Chef / cheffe](https://www.inclusi.fr/blog/chef-cheffe-inclusif) | `chef·fe` ; pluriels ajoutés. |
-| [Docteur / docteure](https://www.inclusi.fr/blog/docteur-docteure-inclusif) | `docteur·e`, sans généraliser la terminaison `·ice`. |
-| [Municipaux / municipales](https://www.inclusi.fr/blog/municipaux-municipales-inclusif) | `municipaux·ales`, pluriel explicitement conservé. |
-| [Nombreux / nombreuses](https://www.inclusi.fr/blog/nombreux-nombreuses-inclusif) | Le module utilise `nombreux·ses` pour préserver le pluriel ; la fiche affiche une terminaison sans ce `s`. |
-| [Con / conne](https://www.inclusi.fr/blog/con-conne-inclusif) | `con·ne`, avec pluriels. |
-| [Alternant / alternante](https://www.inclusi.fr/blog/alternant-alternante-inclusif) | `alternant·e`, avec pluriels. |
+| [Eux / elles](https://www.inclusi.fr/blog/eux-elles-inclusif) | `elleux`, par exemple après une préposition. Lorsque `elles` est sujet, le module utilise `iels`. |
+| [Lequel / laquelle](https://www.inclusi.fr/blog/lequel-laquelle-inclusif) | `laequelle`. Le pluriel `lesquel·le·s` a été ajouté. |
+| [Ce / cette](https://www.inclusi.fr/blog/ce-cette-inclusif) | `ce·tte` devant une personne. La forme `cet` est également reconnue. |
+| [Chacun / chacune](https://www.inclusi.fr/blog/chacun-chacune-inclusif) | `chacun·e`, déjà présent dans le dictionnaire. |
+| [Certain / certaine](https://www.inclusi.fr/blog/certain-certaine-inclusif) | `certain·e` et `certain·e·s`. |
+| [Frère / sœur](https://www.inclusi.fr/blog/frere-soeur-inclusif) | `frœur`. Le pluriel et l’écriture sans ligature ont été ajoutés. |
+| [Monsieur / madame](https://www.inclusi.fr/blog/monsieur-madame-inclusif) | `mondame`. Le module utilise aussi `mondames` pour `messieurs` et `mesdames` ; ce pluriel est un ajout. |
+| [Nouveau / nouvelle](https://www.inclusi.fr/blog/nouveau-nouvelle-inclusif) | `nouvelle·au`. La forme `nouvel` est également reconnue. |
+| [Nouveaux / nouvelles](https://www.inclusi.fr/blog/nouveaux-nouvelles-inclusif) | `nouvelle·aux`. |
+| [Beau / belle](https://www.inclusi.fr/blog/beau-belle-inclusif) | `beau·elle`. La forme `bel` a été ajoutée. |
+| [Beaux / belles](https://www.inclusi.fr/blog/beaux-belles-inclusif) | `beaux·elles`, avec une entrée propre au pluriel. |
+| [Fou / folle](https://www.inclusi.fr/blog/fou-folle-inclusif) | `fou·lle`. La forme `fol` et les pluriels ont été ajoutés. |
+| [Vieux / vieille](https://www.inclusi.fr/blog/vieux-vieille-inclusif) | `vieux·eille`. La forme `vieil` est aussi reconnue, mais le script ne sait pas toujours si `vieux` est au singulier ou au pluriel. |
+| [Copain / copine](https://www.inclusi.fr/blog/copain-copine-inclusif) | `copain·ine`, qui remplace l’ancienne forme `copain·e`. |
+| [Roi / reine](https://www.inclusi.fr/blog/roi-reine-inclusif) | `roi·eine`. Les pluriels ont été ajoutés. |
+| [Chef / cheffe](https://www.inclusi.fr/blog/chef-cheffe-inclusif) | `chef·fe`, avec les pluriels. |
+| [Docteur / docteure](https://www.inclusi.fr/blog/docteur-docteure-inclusif) | `docteur·e`. La terminaison `·ice` ne s’applique donc pas à tous les mots en `-teur`. |
+| [Municipaux / municipales](https://www.inclusi.fr/blog/municipaux-municipales-inclusif) | `municipaux·ales`. |
+| [Nombreux / nombreuses](https://www.inclusi.fr/blog/nombreux-nombreuses-inclusif) | `nombreux·ses`. Le module conserve le `s` du pluriel, absent de la terminaison proposée dans la fiche. |
+| [Con / conne](https://www.inclusi.fr/blog/con-conne-inclusif) | `con·ne`, avec les pluriels. |
+| [Alternant / alternante](https://www.inclusi.fr/blog/alternant-alternante-inclusif) | `alternant·e`, avec les pluriels. |
 
-### Pronoms, possessifs et parenté
+## Les pronoms, les possessifs et les liens de parenté
 
-Le [guide présenté par Inclusi à partir de Divergenres](https://www.inclusi.fr/blog/guide-de-grammaire-neutre-et-inclusive---par-divergenres) sert de référence pour `iel`, `iels`, `ellui`, `maon`, `taon`, `saon`, `tancle` et `parent`. Le module choisit ces variantes parmi les possibilités du guide. Il ne remplace pas `lae` par la variante d'article de ce guide. Les possessifs sont modifiés uniquement devant les personnes reconnues. Le traitement des prépositions et des expressions impersonnelles est une règle ajoutée au module.
+Les formes `iel`, `iels`, `ellui`, `maon`, `taon`, `saon`, `tancle` et `parent` viennent du [guide de Divergenres présenté sur Inclusi](https://www.inclusi.fr/blog/guide-de-grammaire-neutre-et-inclusive---par-divergenres). Le guide propose plusieurs possibilités ; le module en retient certaines pour garder une écriture cohérente. L’article `lae` reste utilisé.
 
-Exemples de comportement vérifié :
+Les possessifs changent uniquement lorsque le script reconnaît une personne dans les mots qui suivent. Des règles ont aussi été ajoutées pour les prépositions et certaines expressions impersonnelles.
 
-- `elles arrivent` → `iels arrivent` ; `avec elles` → `avec elleux`.
-- `pour lui` → `pour ellui` ; `je lui parle` reste inchangé.
-- `mon frère` → `maon frœur` ; `mon livre` reste inchangé.
-- `il faut`, `il y a`, `il pleut`, `il fait beau` sont préservés.
-- `au docteur` → `à lae docteur·e` et `du chef` → `de lae chef·fe` sont des adaptations à notre convention d'article.
+Voici quelques exemples vérifiés :
 
-## Fiches relues sans reprise automatique de toutes leurs variantes
+- `elles arrivent` devient `iels arrivent`, tandis que `avec elles` devient `avec elleux` ;
+- `pour lui` devient `pour ellui`, mais `je lui parle` reste inchangé ;
+- `mon frère` devient `maon frœur`, mais `mon livre` reste inchangé ;
+- `il faut`, `il y a`, `il pleut` et `il fait beau` restent tels quels ;
+- `au docteur` devient `à lae docteur·e`, et `du chef` devient `de lae chef·fe`, pour suivre le choix de l’article `lae`.
 
-| Fiche | Décision |
+## Les formes conservées après relecture
+
+Certaines fiches proposent d’autres écritures que celles du dictionnaire. Elles n’ont pas toutes été reprises : plusieurs formes existantes ont été conservées pour garder les mêmes conventions ou éviter de changer le sens d’une phrase.
+
+| Article | Choix retenu |
 |---|---|
-| [Maire / mairesse](https://www.inclusi.fr/blog/maire-mairesse-inclusif) | Pas de remplacement systématique par le seul féminin `mairesse`. La correspondance épicène existante est conservée. |
-| [Homme / femme](https://www.inclusi.fr/blog/homme-femme-inclusif) | Pas de remplacement automatique par `personne` : cela exige aussi de revoir les accords et le sens, notamment pour `femme` au sens de conjointe. |
-| [Auteur / autrice](https://www.inclusi.fr/blog/auteur-autrice-inclusif) | Conservation de `auteur·ice`, cohérent avec le choix du module ; la fiche propose une autre terminaison. |
-| [Médiateur / médiatrice](https://www.inclusi.fr/blog/mediateur-mediatrice-inclusif) | Conservation de `médiateur·ice` plutôt que changement global de convention. |
-| [Tous / toutes](https://www.inclusi.fr/blog/tous-toutes-inclusif) | Conservation de `tou·te·s` ; `toustes` est une autre option, pas une correction obligatoire. |
-| [Heureux / heureuse](https://www.inclusi.fr/blog/heureux-heureuse-inclusif) | `heureux·se` confirmé ; ambiguïté de nombre inchangée. |
-| [Positifs / positives](https://www.inclusi.fr/blog/positifs-positives-inclusif) | Conservation du pluriel `positif·ve·s` de notre convention. |
-| [Étudiant / étudiante](https://www.inclusi.fr/blog/etudiant-etudiante-inclusif) | Correspondance existante confirmée. |
-| [Inscrits / inscrites](https://www.inclusi.fr/blog/inscrits-inscrites-inclusif) | Conservation des deux points médians de `inscrit·e·s`. |
-| [Candidat / candidate](https://www.inclusi.fr/blog/candidat-candidate-inclusif) | Correspondance existante confirmée. |
-| [Content / contente](https://www.inclusi.fr/blog/content-contente-inclusif) | Correspondance existante confirmée. |
-| [Premier / première](https://www.inclusi.fr/blog/premier-premiere-inclusif) | Correspondance existante confirmée. |
-| [Conseiller / conseillère](https://www.inclusi.fr/blog/conseiller-conseillere-inclusif) | Correspondance existante confirmée. |
-| [Petit / petite](https://www.inclusi.fr/blog/petit-petite-inclusif) | Correspondance existante confirmée ; pas de substitution générale par `enfant`. |
+| [Maire / mairesse](https://www.inclusi.fr/blog/maire-mairesse-inclusif) | La forme épicène déjà présente est conservée. Le module ne remplace pas systématiquement `maire` par `mairesse`. |
+| [Homme / femme](https://www.inclusi.fr/blog/homme-femme-inclusif) | Ces mots ne sont pas automatiquement remplacés par `personne`. Cela demanderait de revoir les accords et pourrait changer le sens, notamment lorsque `femme` désigne une conjointe. |
+| [Auteur / autrice](https://www.inclusi.fr/blog/auteur-autrice-inclusif) | `auteur·ice` est conservé, même si la fiche propose une autre terminaison. |
+| [Médiateur / médiatrice](https://www.inclusi.fr/blog/mediateur-mediatrice-inclusif) | `médiateur·ice` est conservé pour suivre la convention du module. |
+| [Tous / toutes](https://www.inclusi.fr/blog/tous-toutes-inclusif) | Le module garde `tou·te·s`. La forme `toustes` est une autre possibilité. |
+| [Heureux / heureuse](https://www.inclusi.fr/blog/heureux-heureuse-inclusif) | `heureux·se` est conservé. Le singulier et le pluriel restent parfois difficiles à distinguer. |
+| [Positifs / positives](https://www.inclusi.fr/blog/positifs-positives-inclusif) | Le pluriel reste `positif·ve·s`. |
+| [Étudiant / étudiante](https://www.inclusi.fr/blog/etudiant-etudiante-inclusif) | La forme déjà présente est conservée. |
+| [Inscrits / inscrites](https://www.inclusi.fr/blog/inscrits-inscrites-inclusif) | Le module garde les deux points médians de `inscrit·e·s`. |
+| [Candidat / candidate](https://www.inclusi.fr/blog/candidat-candidate-inclusif) | La forme déjà présente est conservée. |
+| [Content / contente](https://www.inclusi.fr/blog/content-contente-inclusif) | La forme déjà présente est conservée. |
+| [Premier / première](https://www.inclusi.fr/blog/premier-premiere-inclusif) | La forme déjà présente est conservée. |
+| [Conseiller / conseillère](https://www.inclusi.fr/blog/conseiller-conseillere-inclusif) | La forme déjà présente est conservée. |
+| [Petit / petite](https://www.inclusi.fr/blog/petit-petite-inclusif) | La forme déjà présente est conservée. Le module ne remplace pas automatiquement ces mots par `enfant`. |
 
-## Limites et installation
+## Ce que le script ne sait pas encore faire
 
-Ces règles restent heuristiques. Elles ne déterminent pas si un pronom renvoie à une personne ou à un objet, ne reconnaissent pas toutes les expressions impersonnelles et ne réécrivent pas toute la syntaxe. La sélection indique le passage que l'on souhaite convertir ; une relecture reste nécessaire. Un mot réparti sur plusieurs fragments de mise en forme peut encore empêcher la reconnaissance du contexte.
+Le script s’appuie sur un dictionnaire et des règles de contexte : il ne comprend pas entièrement les phrases. Il ne sait pas toujours si un pronom désigne une personne ou un objet, et certaines expressions impersonnelles peuvent lui échapper. Il ne reprend pas non plus toute la construction d’une phrase pour en ajuster les accords.
 
-Les exceptions sont intégrées dans `javascript.js`, prioritaires même avec l'ancien dictionnaire distant ou son cache. Remplacer le JavaScript du forum suffit pour activer cette révision. Mettre aussi à jour `javascript.js`, `dictionnaire-inclusif.json`, `exceptions-blog.json` et ce document dans le dépôt pour garder les sources synchronisées. `exceptions-blog.json` documente les données embarquées ; il n'est pas téléchargé séparément par le navigateur.
+La conversion porte sur le texte sélectionné, mais une relecture reste nécessaire. La mise en forme peut également gêner la reconnaissance lorsqu’un mot est coupé entre plusieurs éléments HTML.
 
-Aucune modification n'a été publiée sur GitHub depuis cet espace de travail.
+## Mettre le module à jour
+
+Les exceptions sont intégrées directement dans `javascript.js`. Elles passent avant les entrées du dictionnaire, même si le navigateur utilise encore une ancienne version de celui-ci en cache. **Remplacer le JavaScript du forum suffit donc à activer ces changements.**
+
+Pour que le dépôt corresponde à la version utilisée sur le forum, il faut aussi y mettre à jour :
+
+- `javascript.js` ;
+- `dictionnaire-inclusif.json` ;
+- `exceptions-blog.json` ;
+- ce document.
+
+Le fichier `exceptions-blog.json` sert à consulter les exceptions intégrées au script. Le navigateur ne le télécharge pas séparément.
+
+Les fichiers ont été préparés localement ; aucune modification n’a été publiée sur GitHub depuis cet espace de travail.
