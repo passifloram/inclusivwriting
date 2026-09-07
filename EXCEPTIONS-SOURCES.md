@@ -2,7 +2,7 @@
 
 Texte mis à jour le 7 septembre 2026 à partir des articles du blog Inclusi.
 
-Cette liste reprend les propositions des articles qui ont pu être consultés. Certaines fiches étaient présentes dans l’index, mais leur contenu n’était pas accessible : elles n’ont donc pas été utilisées. Le dictionnaire ne reprend pas encore l’ensemble du blog.
+Cette liste reprend les propositions des articles que j'ai consulté, le dictionnaire ne reprend pas encore l’ensemble du blog.
 
 ## Les choix d’écriture du module
 
@@ -10,7 +10,8 @@ Le module utilise les points médians pour les noms et les adjectifs, avec quelq
 
 Les points simples utilisés dans certaines fiches sont remplacés par des points médians. Lorsque l’article ne donne qu’un singulier, des pluriels ont parfois été ajoutés pour compléter le dictionnaire. Ces ajouts sont indiqués ci-dessous.
 
-Le script comprend **82 correspondances prioritaires**, reconnaît **8 anciennes graphies** et applique des règles supplémentaires aux articles, aux possessifs et aux pronoms. Une partie de ces correspondances existait déjà : il ne s’agit donc pas de 82 nouveaux mots. Le dictionnaire contient au total **64 128 formes**.
+Le script comprend **82 correspondances prioritaires**, reconnaît **8 anciennes graphies** et applique des règles supplémentaires aux articles, aux possessifs et aux pronoms.
+Le dictionnaire contient au total **64 128 formes**.
 
 ## Les formes ajoutées ou corrigées
 
@@ -44,8 +45,6 @@ Le script comprend **82 correspondances prioritaires**, reconnaît **8 anciennes
 ## Les pronoms, les possessifs et les liens de parenté
 
 Les formes `iel`, `iels`, `ellui`, `maon`, `taon`, `saon`, `tancle` et `parent` viennent du [guide de Divergenres présenté sur Inclusi](https://www.inclusi.fr/blog/guide-de-grammaire-neutre-et-inclusive---par-divergenres). Le guide propose plusieurs possibilités ; le module en retient certaines pour garder une écriture cohérente. L’article `lae` reste utilisé.
-
-Les possessifs changent uniquement lorsque le script reconnaît une personne dans les mots qui suivent. Des règles ont aussi été ajoutées pour les prépositions et certaines expressions impersonnelles.
 
 Voici quelques exemples vérifiés :
 
