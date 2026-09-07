@@ -1,10 +1,10 @@
 # Installation
 
-Cette version utilise un dictionnaire de **64 077 formes reconnues** (environ 2,4 Mo), généré à partir de Dicollecte 6.4.1 et complété par tes correspondances. Ce nombre inclut les féminins et les pluriels : ce ne sont pas 64 077 mots de base différents.
+Cette version utilise un dictionnaire de **64 077 formes reconnues** (environ 2,4 Mo), généré à partir de Dicollecte 6.4.1. Ce nombre inclut les féminins et les pluriels : ce ne sont pas 64 077 mots de base différents.
 
 ## 1. Ajouter le dictionnaire sur GitHub
 
-Dans ton dépôt `delulucriminou/en_inclusif`, sur la branche `main`, ajoute à la racine :
+Dans ton dépôt, sur la branche `main`, ajoute à la racine :
 
 - `dictionnaire-inclusif.json`
 - `NOTICE-Dicollecte.txt`
